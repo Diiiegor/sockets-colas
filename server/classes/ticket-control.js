@@ -1,10 +1,12 @@
 const ConfigModel = require("../models/config");
+const {Ticket} = require('./Ticket');
 
 class TicketControl {
 
     constructor() {
         this.ultimo = 0;
         this.hoy = new Date().getDate();
+        this.tickets = [];
         //consulta en base de datos la ultima configuracion se ticketes donde esta el ultimo ticket y su dia
         ConfigModel.findOne({}, {}, {sort: {'_id': -1}}).exec((err, configDb) => {
             if (err) {
@@ -12,11 +14,12 @@ class TicketControl {
                 return;
             }
             if (!configDb) {
-                this.reiniciarConteo();
+                return this.reiniciarConteo();
             }
 
             if (configDb.hoy == this.hoy) {
                 this.ultimo = configDb.ultimo;
+                this.tickets = configDb.tickets;
             } else {
                 this.reiniciarConteo();
             }
@@ -26,12 +29,15 @@ class TicketControl {
 
     reiniciarConteo() {
         this.ultimo = 0;
+        this.tickets = [];
         console.log("Se ha inicializado el sistema");
         this.guardarDb();
     }
 
     siguienteTicket() {
         this.ultimo += 1;
+        const ticket = new Ticket(this.ultimo, null);
+        this.tickets.push(ticket);
         this.guardarDb();
         return `Ticket ${this.ultimo}`;
     }
@@ -43,7 +49,8 @@ class TicketControl {
     guardarDb() {
         let configmodel = new ConfigModel({
             ultimo: this.ultimo,
-            hoy: this.hoy
+            hoy: this.hoy,
+            tickets: this.tickets
         });
 
         configmodel.save((err, configdb) => {

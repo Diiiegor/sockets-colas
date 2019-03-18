@@ -7,6 +7,14 @@ let configSchema = new Schema({
     },
     hoy: {
         type: Number,
+    },
+    tickets: {
+        type: [
+            {
+                numero: Number,
+                escritorio: Number
+            }
+        ]
     }
 });
 
