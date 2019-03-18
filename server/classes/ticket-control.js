@@ -46,7 +46,7 @@ class TicketControl {
             if (err) {
                 console.log("Error guardando en database")
             } else {
-                console.log(configdb)
+                //console.log(configdb)
             }
         });
     }
