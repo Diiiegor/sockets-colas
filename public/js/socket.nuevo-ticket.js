@@ -12,6 +12,11 @@ socket.on('disconnect', () => {
 });
 
 
+socket.on('estadoActual', (ticket) => {
+    label.text(ticket.actual)
+});
+
+
 $('button').on('click', function () {
     socket.emit('siguienteTicket', null, (siguienteTicket) => {
         label.text(siguienteTicket)

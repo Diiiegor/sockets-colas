@@ -11,5 +11,7 @@ io.on('connection', (client) => {
 
     });
 
+    //Emitir evento estadoActual
+    client.emit('estadoActual',{actual:ticketControl.getUltimoTicket()});
 
 });

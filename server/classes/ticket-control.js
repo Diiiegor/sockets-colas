@@ -36,6 +36,10 @@ class TicketControl {
         return `Ticket ${this.ultimo}`;
     }
 
+    getUltimoTicket() {
+        return `Ticket ${this.ultimo}`;
+    }
+
     guardarDb() {
         let configmodel = new ConfigModel({
             ultimo: this.ultimo,
