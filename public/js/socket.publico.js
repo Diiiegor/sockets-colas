@@ -31,10 +31,16 @@ socket.on('estadoActual', function (resp) {
     actualizaHtml(resp.ultimos4)
 });
 
+socket.on('ultimos4', function (resp) {
+    let audio=new Audio('audio/new-ticket.mp3');
+    audio.play();
+    actualizaHtml(resp.ultimos4)
+});
+
 
 function actualizaHtml(ultimos4) {
     for (let i = 0; i <= ultimos4.length - 1; i++) {
-        lblTickets[i].text('Ticket '+ultimos4[i].numero);
+        lblTickets[i].text('Ticket ' + ultimos4[i].numero);
         lblEscritorios[i].text('Escritorio ' + ultimos4[i].escritorio);
     }
 }
