@@ -49,6 +49,9 @@ class TicketControl {
         return `Ticket ${this.ultimo}`;
     }
 
+    getUltimos4() {
+        return this.ultimos4;
+    }
     atenderTicket(escritorio) {
         if (this.tickets.length == 0) {
             return 'No hay mas tickets';
