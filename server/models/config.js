@@ -15,6 +15,14 @@ let configSchema = new Schema({
                 escritorio: Number
             }
         ]
+    },
+    ultimos4: {
+        type: [
+            {
+                numero: Number,
+                escritorio: Number
+            }
+        ]
     }
 });
 

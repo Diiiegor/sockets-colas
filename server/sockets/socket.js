@@ -12,6 +12,20 @@ io.on('connection', (client) => {
     });
 
     //Emitir evento estadoActual
-    client.emit('estadoActual',{actual:ticketControl.getUltimoTicket()});
+    client.emit('estadoActual', {actual: ticketControl.getUltimoTicket()});
+
+    client.on('atenderTicket', (data, callback) => {
+        if (!data.escritorio) {
+            callback({
+                err: true,
+                mensaje: 'El escritorio es necesario'
+            })
+        }
+
+        let atenderTicket = ticketControl.atenderTicket(data.escritorio);
+
+        callback(atenderTicket)
+
+    })
 
 });
