@@ -14,5 +14,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 let urlDb;
 if (process.env.NODE_ENV == 'dev') {
     urlDb = 'mongodb://localhost:27017/colas';
+} else {
+    urlDb = process.env.URLDB
 }
 process.env.URLDB = urlDb;
